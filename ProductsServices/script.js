@@ -9,6 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
   let itemsPerPage = 6;
   let cart = [];
 
+  // Nama dan deskripsi tanaman secara acak
+  const plantNames = [
+    "Monstera",
+    "Aloe Vera",
+    "Lavender",
+    "Snake Plant",
+    "Cactus",
+    "Bamboo",
+    "Peace Lily",
+    "Fiddle Leaf Fig",
+  ];
+  const plantDescriptions = [
+    "Tanaman hias dengan daun besar dan unik.",
+    "Tanaman sukulen yang memiliki manfaat kesehatan.",
+    "Tanaman wangi yang memberikan aroma segar.",
+    "Tanaman yang mudah dirawat di dalam ruangan.",
+    "Tanaman kaktus kecil yang cocok untuk dekorasi.",
+    "Bambu keberuntungan yang melambangkan keberuntungan.",
+    "Tanaman yang membantu menyaring udara di rumah.",
+    "Tanaman berdaun lebar yang cocok untuk interior modern.",
+  ];
+
   // Load cart from localStorage
   function loadCart() {
     const storedCart = localStorage.getItem("cart");
@@ -28,7 +50,34 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("https://dummyjson.com/products?limit=50")
       .then((res) => res.json())
       .then((data) => {
-        allProducts = data.products;
+        allProducts = data.products.map((product, index) => {
+          // Ubah nama, deskripsi, dan gambar produk menjadi terkait tanaman
+          const randomPlantName =
+            plantNames[Math.floor(Math.random() * plantNames.length)];
+          const randomPlantDescription =
+            plantDescriptions[
+              Math.floor(Math.random() * plantDescriptions.length)
+            ];
+
+          // Tambahkan kategori tanaman secara acak
+          const plantCategories = [
+            "Indoor Plants",
+            "Outdoor Plants",
+            "Succulents",
+            "Flowering Plants",
+            "Herbs",
+          ];
+          const randomCategory =
+            plantCategories[Math.floor(Math.random() * plantCategories.length)];
+
+          return {
+            ...product,
+            title: randomPlantName, // Ganti dengan nama tanaman acak
+            description: randomPlantDescription, // Ganti dengan deskripsi tanaman acak
+            thumbnail: "../public/plants.png", // Ganti dengan gambar tanaman lokal
+            category: randomCategory, // Ganti kategori menjadi tanaman acak
+          };
+        });
         setupCategoryFilter();
         displayProducts();
       })
@@ -36,11 +85,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function setupCategoryFilter() {
-    const categories = [
-      "All",
-      ...new Set(allProducts.map((product) => product.category)),
+    // Definisikan kategori khusus untuk tanaman
+    const plantCategories = [
+      "All", // Untuk menampilkan semua produk
+      "Indoor Plants", // Tanaman dalam ruangan
+      "Outdoor Plants", // Tanaman luar ruangan
+      "Succulents", // Tanaman sukulen
+      "Flowering Plants", // Tanaman berbunga
+      "Herbs", // Tanaman herbal
     ];
-    categoryFilter.innerHTML = categories
+
+    // Render kategori-kategori tersebut ke dalam filter
+    categoryFilter.innerHTML = plantCategories
       .map((category) => `<option value="${category}">${category}</option>`)
       .join("");
   }
@@ -61,15 +117,21 @@ document.addEventListener("DOMContentLoaded", function () {
       .map(
         (product) => `
           <div class="card">
-              <img class="img-card" src="${product.thumbnail}" alt="${product.title}">
-              <div class="text-card">
-                  <p class="name-card">${product.title}</p>
-                  <p>${product.description}</p>
-                  <p>Category: ${product.category}</p>
-              </div>
-              <div class="bg-button">
-                  <button class="button-card" onclick="addToCart(${product.id})">Add to Cart</button>
-              </div>
+            <img class="img-card" src="../public/plants.png" alt="${
+              product.title
+            }">
+            <div class="text-card">
+              <p class="name-card">${product.title}</p>
+              <p>${product.description}</p>
+              <p class="price-card">Price: $${product.price.toFixed(
+                2
+              )}</p> <!-- Harga di bawah deskripsi -->
+            </div>
+            <div class="bg-button">
+              <button class="button-card" onclick="addToCart(${
+                product.id
+              })">Add to Cart</button>
+            </div>
           </div>
         `
       )

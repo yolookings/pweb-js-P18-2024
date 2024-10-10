@@ -181,27 +181,41 @@ main {
   margin: 0 10px 0 10px;
 }
 
-.bg-button {
+.button-card {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-  background-color: #ecf0f1;
-  width: 200px;
-  height: 50px;
-  border-radius: 20px;
+  font-weight: 700;
+  color: #ffffff; /* Mengubah teks menjadi warna putih untuk kontras */
+  background: linear-gradient(
+    45deg,
+    #f16838,
+    #f88e38
+  ); /* Gradasi warna oranye */
+  padding: 12px 24px; /* Memberikan ruang di dalam tombol */
+  border: none; /* Menghilangkan border default */
+  border-radius: 30px; /* Sudut tombol yang membulat */
+  cursor: pointer; /* Menjadikan kursor berubah menjadi pointer */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+  text-align: center;
+  transition: all 0.3s ease-in-out; /* Efek transisi yang halus */
   margin-bottom: 20px;
 }
 
-.bg-button:hover {
-  background-color: #e1dc53;
+.button-card:hover {
+  background: linear-gradient(
+    45deg,
+    #f88e38,
+    #f16838
+  ); /* Membalik gradasi saat hover */
+  transform: scale(1.05); /* Sedikit memperbesar tombol saat disentuh */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Menambahkan lebih banyak bayangan saat hover */
 }
 
-.button-card {
-  font-weight: 700;
-  color: #f16838;
-  text-decoration: none;
-  text-align: center;
+.button-card:active {
+  transform: scale(0.98); /* Sedikit memperkecil tombol saat diklik */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Mengurangi bayangan saat tombol diklik */
 }
 
 .center {
@@ -374,6 +388,12 @@ footer {
   background-color: #f0f0f0;
 }
 
+.price-card {
+  font-weight: bold;
+  color: #4caf50; /* Warna hijau yang sesuai dengan tema tumbuhan */
+  margin-top: 10px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   #cart-section {
@@ -536,13 +556,40 @@ footer {
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f4f4f9; /* Memberi latar belakang lembut */
+  border-radius: 10px; /* Membulatkan sudut container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Memberi bayangan lembut */
+  transition: all 0.3s ease-in-out; /* Efek transisi untuk keseluruhan container */
+}
+
+.filter-controls:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Memperbesar bayangan saat hover */
 }
 
 #category-filter,
 #items-per-page {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #339551;
+  padding: 12px 20px; /* Memberikan lebih banyak ruang di dalam input */
+  border-radius: 30px; /* Membuat border yang lebih halus */
+  border: 2px solid #339551; /* Warna border lebih terang */
+  background: #ffffff; /* Latar belakang putih yang bersih */
+  color: #339551; /* Warna teks disesuaikan dengan border */
+  font-weight: 600; /* Membuat teks lebih tegas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sedikit bayangan untuk input */
+  transition: all 0.3s ease-in-out; /* Efek transisi halus */
+}
+
+#category-filter:hover,
+#items-per-page:hover {
+  border-color: #2b7a42; /* Warna border saat hover */
+  background-color: #f0fff4; /* Warna latar belakang saat hover */
+}
+
+#category-filter:focus,
+#items-per-page:focus {
+  outline: none; /* Menghilangkan outline default */
+  border-color: #1e5b2a; /* Border menjadi lebih gelap saat fokus */
+  box-shadow: 0 0 8px rgba(51, 149, 81, 0.5); /* Efek cahaya di sekitar input saat fokus */
 }
 
 #pagination {
@@ -639,4 +686,47 @@ footer {
   background-color: #267346;
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.hidden {
+  opacity: 0;
+}
+
+.cart-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 14px;
 }
