@@ -83,7 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let paginationHTML = "";
 
     if (currentPage > 1) {
-      paginationHTML += `<button onclick="changePage(${currentPage - 1})">Previous</button>`;
+      paginationHTML += `<button onclick="changePage(${
+        currentPage - 1
+      })">Previous</button>`;
     }
 
     for (let i = 1; i <= totalPages; i++) {
@@ -93,7 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (currentPage < totalPages) {
-      paginationHTML += `<button onclick="changePage(${currentPage + 1})">Next</button>`;
+      paginationHTML += `<button onclick="changePage(${
+        currentPage + 1
+      })">Next</button>`;
     }
 
     paginationContainer.innerHTML = paginationHTML;
@@ -143,24 +147,30 @@ document.addEventListener("DOMContentLoaded", function () {
     displayCart();
   };
   function updateCartSummary() {
-    const totalProducts = cart.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-  
+    const totalProducts = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    const totalPrice = cart.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+
     document.getElementById("total-products").innerText = totalProducts;
     document.getElementById("total-price").innerText = totalPrice.toFixed(2);
   }
 
   // Function to display the cart
   function displayCart() {
-  if (cart.length === 0) {
-    cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-    document.getElementById("cart-summary").style.display = "none"; // Hide summary when cart is empty
-    return;
-  }
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+      document.getElementById("cart-summary").style.display = "none"; // Hide summary when cart is empty
+      return;
+    }
 
-  cartContainer.innerHTML = cart
-    .map(
-      (item) => `
+    cartContainer.innerHTML = cart
+      .map(
+        (item) => `
         <div class="cart-item">
             <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
             <div class="cart-details">
@@ -170,17 +180,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="cart-controls">
                 <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
-                <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                <button onclick="updateCartQuantity(${item.id}, -1)">-</button>   
+            </div>
+            <div class="cart-controls-remove">
                 <button onclick="removeFromCart(${item.id})">Remove</button>
             </div>
         </div>
       `
-    )
-    .join("");
+      )
+      .join("");
 
-  document.getElementById("cart-summary").style.display = "block"; // Show summary when cart has items
-  updateCartSummary(); // Update the total products and price
-}
+    document.getElementById("cart-summary").style.display = "block"; // Show summary when cart has items
+    updateCartSummary(); // Update the total products and price
+  }
 
   // Category filter change event
   categoryFilter.addEventListener("change", () => {
@@ -196,17 +208,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const checkoutButton = document.getElementById("checkout-btn");
-checkoutButton.addEventListener("click", function () {
-  if (cart.length > 0) {
-    alert("Terima kasih telah berbelanja di GreenOasis!");
-    // Optionally, clear the cart after checkout
-    cart = [];
-    displayCart();
-    updateCartSummary();
-  } else {
-    alert("Keranjang belanja Anda kosong.");
-  }
-});
+  checkoutButton.addEventListener("click", function () {
+    if (cart.length > 0) {
+      alert("Terima kasih telah berbelanja di GreenOasis!");
+      // Optionally, clear the cart after checkout
+      cart = [];
+      displayCart();
+      updateCartSummary();
+    } else {
+      alert("Keranjang belanja Anda kosong.");
+    }
+  });
 
   fetchProducts();
   loadCart(); // Load cart from localStorage when the page loads
