@@ -1,59 +1,38 @@
-// script.js
 document.addEventListener("DOMContentLoaded", function () {
   const productGrid = document.querySelector(".display-card");
   const categoryFilter = document.getElementById("category-filter");
   const itemsPerPageSelect = document.getElementById("items-per-page");
   const paginationContainer = document.getElementById("pagination");
+  const cartContainer = document.getElementById("cart");
   let allProducts = [];
   let currentPage = 1;
   let itemsPerPage = 6;
+  let cart = [];
+
+  // Load cart from localStorage
+  function loadCart() {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      cart = JSON.parse(storedCart);
+    }
+    displayCart();
+  }
+
+  // Save cart to localStorage
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
   // Fetch products from API
   function fetchProducts() {
     fetch("https://dummyjson.com/products?limit=100")
       .then((res) => res.json())
       .then((data) => {
-        allProducts = data.products.map((product) => ({
-          ...product,
-          title: generatePlantName(),
-          category: generatePlantCategory(),
-        }));
+        allProducts = data.products;
         setupCategoryFilter();
         displayProducts();
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }
-
-  function generatePlantName() {
-    const plantNames = [
-      "Monstera Deliciosa",
-      "Ficus Lyrata",
-      "Sansevieria",
-      "Philodendron",
-      "Calathea Orbifolia",
-      "Aloe Vera",
-      "Pothos",
-      "Spathiphyllum",
-      "Chlorophytum Comosum",
-      "Dracaena Marginata",
-      "Zamioculcas Zamiifolia",
-      "Ficus Elastica",
-      "Epipremnum Aureum",
-      "Chamaedorea Elegans",
-    ];
-    return plantNames[Math.floor(Math.random() * plantNames.length)];
-  }
-
-  function generatePlantCategory() {
-    const categories = [
-      "Tanaman Hias Dalam Ruangan",
-      "Tanaman Hias Luar Ruangan",
-      "Sukulen",
-      "Tanaman Berbunga",
-      "Tanaman Berdaun Indah",
-      "Tanaman Herbal",
-    ];
-    return categories[Math.floor(Math.random() * categories.length)];
   }
 
   function setupCategoryFilter() {
@@ -82,17 +61,17 @@ document.addEventListener("DOMContentLoaded", function () {
       .map(
         (product) => `
           <div class="card">
-              <img class="img-card" src="../public/plants.png" alt="${product.title}">
+              <img class="img-card" src="${product.thumbnail}" alt="${product.title}">
               <div class="text-card">
                   <p class="name-card">${product.title}</p>
                   <p>${product.description}</p>
                   <p>Category: ${product.category}</p>
               </div>
               <div class="bg-button">
-                  <a class="button-card" href="../ContactUs/contact.html">Beli Sekarang</a>
+                  <button class="button-card" onclick="addToCart(${product.id})">Add to Cart</button>
               </div>
           </div>
-      `
+        `
       )
       .join("");
 
@@ -104,9 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let paginationHTML = "";
 
     if (currentPage > 1) {
-      paginationHTML += `<button onclick="changePage(${
-        currentPage - 1
-      })">Previous</button>`;
+      paginationHTML += `<button onclick="changePage(${currentPage - 1})">Previous</button>`;
     }
 
     for (let i = 1; i <= totalPages; i++) {
@@ -116,25 +93,90 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (currentPage < totalPages) {
-      paginationHTML += `<button onclick="changePage(${
-        currentPage + 1
-      })">Next</button>`;
+      paginationHTML += `<button onclick="changePage(${currentPage + 1})">Next</button>`;
     }
 
     paginationContainer.innerHTML = paginationHTML;
   }
 
-  // Expose changePage function globally
-  window.changePage = function (page) {
-    currentPage = page;
+  // Function to change page
+  window.changePage = function (pageNumber) {
+    currentPage = pageNumber;
     displayProducts();
   };
 
+  // Function to add product to cart
+  window.addToCart = function (productId) {
+    const product = allProducts.find((product) => product.id === productId);
+    const cartItem = cart.find((item) => item.id === productId);
+
+    if (cartItem) {
+      cartItem.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    saveCart(); // Save cart to localStorage
+    displayCart();
+  };
+
+  // Function to remove product from cart
+  window.removeFromCart = function (productId) {
+    cart = cart.filter((item) => item.id !== productId);
+    saveCart(); // Save cart to localStorage
+    displayCart();
+  };
+
+  // Function to update product quantity in cart
+  window.updateCartQuantity = function (productId, amount) {
+    const cartItem = cart.find((item) => item.id === productId);
+
+    if (cartItem) {
+      cartItem.quantity += amount;
+      if (cartItem.quantity <= 0) {
+        removeFromCart(productId);
+      }
+    }
+
+    saveCart(); // Save cart to localStorage
+    displayCart();
+  };
+
+  // Function to display the cart
+  function displayCart() {
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+      return;
+    }
+
+    cartContainer.innerHTML = cart
+      .map(
+        (item) => `
+          <div class="cart-item">
+              <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
+              <div class="cart-details">
+                  <p>${item.title}</p>
+                  <p>Quantity: ${item.quantity}</p>
+                  <p>Price: $${item.price}</p>
+              </div>
+              <div class="cart-controls">
+                  <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                  <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                  <button onclick="removeFromCart(${item.id})">Remove</button>
+              </div>
+          </div>
+        `
+      )
+      .join("");
+  }
+
+  // Category filter change event
   categoryFilter.addEventListener("change", () => {
     currentPage = 1;
     displayProducts();
   });
 
+  // Items per page change event
   itemsPerPageSelect.addEventListener("change", (e) => {
     itemsPerPage = parseInt(e.target.value);
     currentPage = 1;
@@ -142,4 +184,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   fetchProducts();
+  loadCart(); // Load cart from localStorage when the page loads
 });
