@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fetch products from API
   function fetchProducts() {
-    fetch("https://dummyjson.com/products?limit=100")
+    fetch("https://dummyjson.com/products?limit=50")
       .then((res) => res.json())
       .then((data) => {
         allProducts = data.products;
@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     saveCart(); // Save cart to localStorage
     displayCart();
+    alert(`Produk "${product.title}" telah ditambahkan ke keranjang.`);
   };
 
   // Function to remove product from cart
@@ -141,34 +142,45 @@ document.addEventListener("DOMContentLoaded", function () {
     saveCart(); // Save cart to localStorage
     displayCart();
   };
+  function updateCartSummary() {
+    const totalProducts = cart.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  
+    document.getElementById("total-products").innerText = totalProducts;
+    document.getElementById("total-price").innerText = totalPrice.toFixed(2);
+  }
 
   // Function to display the cart
   function displayCart() {
-    if (cart.length === 0) {
-      cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-      return;
-    }
-
-    cartContainer.innerHTML = cart
-      .map(
-        (item) => `
-          <div class="cart-item">
-              <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
-              <div class="cart-details">
-                  <p>${item.title}</p>
-                  <p>Quantity: ${item.quantity}</p>
-                  <p>Price: $${item.price}</p>
-              </div>
-              <div class="cart-controls">
-                  <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
-                  <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
-                  <button onclick="removeFromCart(${item.id})">Remove</button>
-              </div>
-          </div>
-        `
-      )
-      .join("");
+  if (cart.length === 0) {
+    cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+    document.getElementById("cart-summary").style.display = "none"; // Hide summary when cart is empty
+    return;
   }
+
+  cartContainer.innerHTML = cart
+    .map(
+      (item) => `
+        <div class="cart-item">
+            <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
+            <div class="cart-details">
+                <p>${item.title}</p>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: $${item.price}</p>
+            </div>
+            <div class="cart-controls">
+                <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                <button onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+        </div>
+      `
+    )
+    .join("");
+
+  document.getElementById("cart-summary").style.display = "block"; // Show summary when cart has items
+  updateCartSummary(); // Update the total products and price
+}
 
   // Category filter change event
   categoryFilter.addEventListener("change", () => {
@@ -182,6 +194,19 @@ document.addEventListener("DOMContentLoaded", function () {
     currentPage = 1;
     displayProducts();
   });
+
+  const checkoutButton = document.getElementById("checkout-btn");
+checkoutButton.addEventListener("click", function () {
+  if (cart.length > 0) {
+    alert("Terima kasih telah berbelanja di GreenOasis!");
+    // Optionally, clear the cart after checkout
+    cart = [];
+    displayCart();
+    updateCartSummary();
+  } else {
+    alert("Keranjang belanja Anda kosong.");
+  }
+});
 
   fetchProducts();
   loadCart(); // Load cart from localStorage when the page loads
