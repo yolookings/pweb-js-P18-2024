@@ -747,20 +747,3 @@ footer {
 .toast.hidden {
   opacity: 0;
 }
-
-.cart-icon {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.cart-count {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 50%;
-  font-size: 14px;
-}
