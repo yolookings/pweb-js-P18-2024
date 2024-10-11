@@ -116,6 +116,58 @@ main {
   padding: 2rem;
 }
 
+/* payment method */
+#grid-container {
+  margin-top: 10px;
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+.box {
+  background-color: white;
+  width: 200px;
+  height: 64px;
+  border-radius: 10px;
+}
+.mandiri {
+  background-color: whitesmoke;
+}
+.svg-mandiri {
+  display: flex;
+  justify-content: center;
+}
+.bca {
+  background-color: whitesmoke;
+}
+.svg-bca {
+  display: flex;
+  justify-content: center;
+}
+.mastercard {
+  background-color: whitesmoke;
+}
+.svg-mastercard {
+  display: flex;
+  justify-content: center;
+}
+.qris {
+  background-color: whitesmoke;
+}
+.svg-qris {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Responsive Styles */
 
 @media (max-width: 1024px) {
