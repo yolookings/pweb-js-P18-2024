@@ -1,140 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Produk Kami</title>
-    <link rel="stylesheet" href="product.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  </head>
-  <body>
-    <header>
-      <nav id="main-nav">
-        <div class="logo">GreenOasis</div>
-        <input type="checkbox" id="menu-checkbox" />
-        <label for="menu-checkbox" id="menu-toggle">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </label>
-        <ul>
-          <li><a href="../LandingPage/index.html">Beranda</a></li>
-          <li><a href="../LandingPage/index.html">Tentang Kami</a></li>
-          <li><a href="../LandingPage/index.html">Galeri</a></li>
-          <li><a href="../ProductsServices/product.html">Katalog</a></li>
-          <li><a href="../LandingPage/index.html">Testimoni</a></li>
-          <li><a href="../ContactUs/contact.html">Kontak</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <main>
-      <div class="cart-icon">
-        <i class='bx bxs-cart'></i>
-        <span id="cart-item-count">0</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produk Kami</title>
+  <link rel="stylesheet" href="product.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+  <header>
+    <nav id="main-nav">
+      <div class="logo">GreenOasis</div>
+      <input type="checkbox" id="menu-checkbox" />
+      <label for="menu-checkbox" id="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </label>
+      <ul>
+        <li><a href="../LandingPage/index.html">Beranda</a></li>
+        <li><a href="../LandingPage/index.html">Tentang Kami</a></li>
+        <li><a href="../LandingPage/index.html">Galeri</a></li>
+        <li><a href="../ProductsServices/product.html">Katalog</a></li>
+        <li><a href="../LandingPage/index.html">Testimoni</a></li>
+        <li><a href="../ContactUs/contact.html">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cart-icon">
+      <i class='bx bxs-cart'></i>
+      <span id="cart-item-count">0</span>
+    </div>
+    <section id="first">
+      <div class="explanation">
+        <h1 class="main-explanation">Originally Made by</h1>
+        <a class="green-oasis" href="../LandingPage/index.html">Green Oasis</a>
+        <p class="text-explanation">
+          Green Oasis menawarkan berbagai tanaman hias berkualitas tinggi
+          dengan perawatan terbaik. Dedikasi saya adalah membantu Anda
+          menghadirkan keindahan alam ke dalam rumah dengan tanaman yang indah
+          dan mudah dirawat
+        </p>
       </div>
-      <section id="first">
-        <div class="explanation">
-          <h1 class="main-explanation">Originally Made by</h1>
-          <a class="green-oasis" href="../LandingPage/index.html"
-            >Green Oasis</a
-          >
-          <p class="text-explanation">
-            Green Oasis menawarkan berbagai tanaman hias berkualitas tinggi
-            dengan perawatan terbaik. Dedikasi saya adalah membantu Anda
-            menghadirkan keindahan alam ke dalam rumah dengan tanaman yang indah
-            dan mudah dirawat
-          </p>
-        </div>
-      </section>
+    </section>
 
-      <section id="second">
-        <h1 class="title">Our Products</h1>
-        <div class="filter-controls">
-          <select id="category-filter">
-            <!-- Categories will be populated by JavaScript -->
-          </select>
-          <select id="items-per-page">
-            <option value="6">6 item per page</option>
-            <option value="12">12 item per page</option>
-            <option value="24">24 item per page</option>
-          </select>
-        </div>
-        <div class="display-card">
-          <!-- Product cards will be populated by JavaScript -->
-        </div>
-        <div id="pagination">
-          <!-- Pagination buttons will be populated by JavaScript -->
-        </div>
-      </section>
+    <section id="second">
+      <h1 class="title">Our Products</h1>
+      <div class="filter-controls">
+        <select id="category-filter">
+          <!-- Categories will be populated by JavaScript -->
+        </select>
+        <select id="items-per-page">
+          <option value="6">6 item per page</option>
+          <option value="12">12 item per page</option>
+          <option value="24">24 item per page</option>
+        </select>
+      </div>
+      <div class="display-card">
+        <!-- Product cards will be populated by JavaScript -->
+      </div>
+      <div id="pagination">
+        <!-- Pagination buttons will be populated by JavaScript -->
+      </div>
+    </section>
 
-      </section>
-      <section id="cart-section">
-        <h2>Your Cart</h2>
-        <div id="cart">
-          <!-- Cart items will be populated by JavaScript -->
-        </div>
-        <div id="cart-summary">
-          <p>Total Produk: <span id="total-products">0</span></p>
-          <p>Total Harga: $<span id="total-price">0</span></p>
-          <button id="checkout-btn">Checkout</button>
-        </div>
-      </section>
+    </section>
+    <section id="cart-section">
+      <h2>Your Cart</h2>
+      <div id="cart">
+        <!-- Cart items will be populated by JavaScript -->
+      </div>
+      <div id="cart-summary">
+        <p>Total Produk: <span id="total-products">0</span></p>
+        <p>Total Harga: $<span id="total-price">0</span></p>
+        <a href="../Checkout/checkout.html"><button id="checkout-btn">Checkout</button></a>
+      </div>
+    </section>
+    <section id="third">
       <section id="third">
-        <section id="third">
-          <div class="container center">
-            <div class="content center">
-              <img
-                src="../public/contact.svg"
-                alt="contact us"
-                class="contact-image"
-              />
-              <h1 class="content-title">Perlu konsultasi?</h1>
-              <p class="content-text">
-                Jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih
-                lanjut, jangan ragu untuk menghubungi kami. Kami siap membantu
-                Anda dengan sepenuh hati!
-              </p>
-              <div class="contact-background center">
-                <a class="contact-text" href="../ContactUs/contact.html"
-                  >Hubungi Kami</a
-                >
-              </div>
+        <div class="container center">
+          <div class="content center">
+            <img src="../public/contact.svg" alt="contact us" class="contact-image" />
+            <h1 class="content-title">Perlu konsultasi?</h1>
+            <p class="content-text">
+              Jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih
+              lanjut, jangan ragu untuk menghubungi kami. Kami siap membantu
+              Anda dengan sepenuh hati!
+            </p>
+            <div class="contact-background center">
+              <a class="contact-text" href="../ContactUs/contact.html">Hubungi Kami</a>
             </div>
           </div>
-        </section>
-    </main>
+        </div>
+      </section>
+  </main>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>GreenOasis</h3>
-          <p>Membawa Keindahan Alam ke Dalam Rumah Anda</p>
-        </div>
-        <div class="footer-section">
-          <h3>Kontak</h3>
-          <p>Email : greenoasis@gmail.com</p>
-          <p>Telepon : (0341) 1234-5678</p>
-        </div>
-        <div class="footer-section">
-          <h3>Ikuti Kami</h3>
-          <a href="">Facebook</a>
-          <a href="">Instagram</a>
-          <a href="">Twitter</a>
-          <a href="">LinkedIn</a>
-          <a href="">YouTube</a>
-        </div>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>GreenOasis</h3>
+        <p>Membawa Keindahan Alam ke Dalam Rumah Anda</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 GreenOasis. Hak Cipta Dilindungi.</p>
+      <div class="footer-section">
+        <h3>Kontak</h3>
+        <p>Email : greenoasis@gmail.com</p>
+        <p>Telepon : (0341) 1234-5678</p>
       </div>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+      <div class="footer-section">
+        <h3>Ikuti Kami</h3>
+        <a href="">Facebook</a>
+        <a href="">Instagram</a>
+        <a href="">Twitter</a>
+        <a href="">LinkedIn</a>
+        <a href="">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 GreenOasis. Hak Cipta Dilindungi.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+
 </html>

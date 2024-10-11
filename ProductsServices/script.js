@@ -37,15 +37,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Cart icon click scroll
-    document.querySelector('.cart-icon i.bxs-cart').addEventListener("click", function() {
+  document
+    .querySelector(".cart-icon i.bxs-cart")
+    .addEventListener("click", function () {
       document.getElementById("cart-section").scrollIntoView({
-          behavior: 'smooth'
+        behavior: "smooth",
       });
-  });
-  
+    });
+
   function setupCategoryFilter() {
     // Extract categories from the API products
-    const categories = ["All", ...new Set(allProducts.map((product) => product.category))];
+    const categories = [
+      "All",
+      ...new Set(allProducts.map((product) => product.category)),
+    ];
 
     // Render categories into the filter
     categoryFilter.innerHTML = categories
@@ -70,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
         (product) => `
           <div class="card">
             <img class="img-card" src="${product.thumbnail}" alt="${
-              product.title
-            }">
+          product.title
+        }">
             <div class="text-card">
               <p class="name-card">${product.title}</p>
               <p>${product.description}</p>
@@ -121,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     document.getElementById("cart-item-count").innerText = totalItems;
   }
-  
+
   // Function to change page
   window.changePage = function (pageNumber) {
     currentPage = pageNumber;
@@ -233,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkoutButton = document.getElementById("checkout-btn");
   checkoutButton.addEventListener("click", function () {
     if (cart.length > 0) {
-      alert("Terima kasih telah berbelanja di GreenOasis!");
+      alert("Silahkan Lakukan Pembayaran :)");
       // Optionally, clear the cart after checkout
       cart = [];
       displayCart();
