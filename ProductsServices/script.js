@@ -8,28 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentPage = 1;
   let itemsPerPage = 6;
   let cart = [];
-
-  // Nama dan deskripsi tanaman secara acak
-  const plantNames = [
-    "Monstera",
-    "Aloe Vera",
-    "Lavender",
-    "Snake Plant",
-    "Cactus",
-    "Bamboo",
-    "Peace Lily",
-    "Fiddle Leaf Fig",
-  ];
-  const plantDescriptions = [
-    "Tanaman hias dengan daun besar dan unik.",
-    "Tanaman sukulen yang memiliki manfaat kesehatan.",
-    "Tanaman wangi yang memberikan aroma segar.",
-    "Tanaman yang mudah dirawat di dalam ruangan.",
-    "Tanaman kaktus kecil yang cocok untuk dekorasi.",
-    "Bambu keberuntungan yang melambangkan keberuntungan.",
-    "Tanaman yang membantu menyaring udara di rumah.",
-    "Tanaman berdaun lebar yang cocok untuk interior modern.",
-  ];
+  let cartItemCount = 0;
 
   // Load cart from localStorage
   function loadCart() {
@@ -50,53 +29,26 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("https://dummyjson.com/products?limit=50")
       .then((res) => res.json())
       .then((data) => {
-        allProducts = data.products.map((product, index) => {
-          // Ubah nama, deskripsi, dan gambar produk menjadi terkait tanaman
-          const randomPlantName =
-            plantNames[Math.floor(Math.random() * plantNames.length)];
-          const randomPlantDescription =
-            plantDescriptions[
-              Math.floor(Math.random() * plantDescriptions.length)
-            ];
-
-          // Tambahkan kategori tanaman secara acak
-          const plantCategories = [
-            "Indoor Plants",
-            "Outdoor Plants",
-            "Succulents",
-            "Flowering Plants",
-            "Herbs",
-          ];
-          const randomCategory =
-            plantCategories[Math.floor(Math.random() * plantCategories.length)];
-
-          return {
-            ...product,
-            title: randomPlantName, // Ganti dengan nama tanaman acak
-            description: randomPlantDescription, // Ganti dengan deskripsi tanaman acak
-            thumbnail: "../public/plants.png", // Ganti dengan gambar tanaman lokal
-            category: randomCategory, // Ganti kategori menjadi tanaman acak
-          };
-        });
+        allProducts = data.products; // Directly use products from the API
         setupCategoryFilter();
         displayProducts();
       })
       .catch((error) => console.error("Error fetching products:", error));
   }
 
+  // Cart icon click scroll
+    document.querySelector('.cart-icon i.bxs-cart').addEventListener("click", function() {
+      document.getElementById("cart-section").scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+  
   function setupCategoryFilter() {
-    // Definisikan kategori khusus untuk tanaman
-    const plantCategories = [
-      "All", // Untuk menampilkan semua produk
-      "Indoor Plants", // Tanaman dalam ruangan
-      "Outdoor Plants", // Tanaman luar ruangan
-      "Succulents", // Tanaman sukulen
-      "Flowering Plants", // Tanaman berbunga
-      "Herbs", // Tanaman herbal
-    ];
+    // Extract categories from the API products
+    const categories = ["All", ...new Set(allProducts.map((product) => product.category))];
 
-    // Render kategori-kategori tersebut ke dalam filter
-    categoryFilter.innerHTML = plantCategories
+    // Render categories into the filter
+    categoryFilter.innerHTML = categories
       .map((category) => `<option value="${category}">${category}</option>`)
       .join("");
   }
@@ -117,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .map(
         (product) => `
           <div class="card">
-            <img class="img-card" src="../public/plants.png" alt="${
+            <img class="img-card" src="${product.thumbnail}" alt="${
               product.title
             }">
             <div class="text-card">
@@ -208,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saveCart(); // Save cart to localStorage
     displayCart();
   };
+
   function updateCartSummary() {
     const totalProducts = cart.reduce(
       (total, item) => total + item.quantity,
