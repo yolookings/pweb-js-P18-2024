@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentPage = 1;
   let itemsPerPage = 6;
   let cart = [];
-  let cartItemCount = 0;
 
   // Load cart from localStorage
   function loadCart() {
@@ -17,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cart = JSON.parse(storedCart);
     }
     displayCart();
+    updateCartIconBadge();
   }
 
   // Save cart to localStorage
@@ -117,6 +117,11 @@ document.addEventListener("DOMContentLoaded", function () {
     paginationContainer.innerHTML = paginationHTML;
   }
 
+  function updateCartIconBadge() {
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cart-item-count").innerText = totalItems;
+  }
+  
   // Function to change page
   window.changePage = function (pageNumber) {
     currentPage = pageNumber;
@@ -136,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     saveCart(); // Save cart to localStorage
     displayCart();
+    updateCartIconBadge();
     alert(`Produk "${product.title}" telah ditambahkan ke keranjang.`);
   };
 
@@ -144,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cart = cart.filter((item) => item.id !== productId);
     saveCart(); // Save cart to localStorage
     displayCart();
+    updateCartIconBadge();
   };
 
   // Function to update product quantity in cart
@@ -159,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     saveCart(); // Save cart to localStorage
     displayCart();
+    updateCartIconBadge();
   };
 
   function updateCartSummary() {
@@ -230,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cart = [];
       displayCart();
       updateCartSummary();
+      updateCartIconBadge();
     } else {
       alert("Keranjang belanja Anda kosong.");
     }
