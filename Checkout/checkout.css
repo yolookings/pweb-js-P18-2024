@@ -132,40 +132,104 @@ main {
   justify-content: space-around;
   gap: 10px;
 }
+
+/* Payment Options */
+.option {
+  background-color: red;
+}
+
 .box {
-  background-color: white;
+  background-color: whitesmoke;
   width: 200px;
   height: 64px;
   border-radius: 10px;
 }
-.mandiri {
-  background-color: whitesmoke;
-}
-.svg-mandiri {
-  display: flex;
-  justify-content: center;
-}
-.bca {
-  background-color: whitesmoke;
-}
-.svg-bca {
-  display: flex;
-  justify-content: center;
-}
-.mastercard {
-  background-color: whitesmoke;
-}
-.svg-mastercard {
-  display: flex;
-  justify-content: center;
-}
+
+.mandiri,
+.bca,
+.mastercard,
 .qris {
   background-color: whitesmoke;
 }
+
+.svg-mandiri,
+.svg-bca,
+.svg-mastercard,
 .svg-qris {
   display: flex;
   justify-content: center;
+}
+
+.svg-qris {
   align-items: center;
+}
+
+/* Form Section Styling for Billing and Payment */
+form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+}
+
+h4 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+input:focus,
+select:focus {
+  border-color: #339551;
+  outline: none;
+}
+
+.invalid-feedback {
+  color: #d9534f;
+}
+
+button[type="submit"] {
+  background-color: #339551;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #287a44;
+}
+
+/* Responsive Grid Layout for Form */
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.col-12 {
+  grid-column: span 2;
 }
 
 /* Responsive Styles */

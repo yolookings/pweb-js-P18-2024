@@ -35,9 +35,8 @@
     </header>
 
     <main>
-        <h2>Payment</h2>
         <div id="grid-container">
-            <div class="item option">
+            <!-- <div class="item option">
                 <div class="box mandiri">
                     <div class="svg-mandiri">
                         <svg xmlns="http://www.w3.org/2000/svg" width="120" height="64"
@@ -109,11 +108,157 @@
                         <img src="../public/qris.png" width="60" height="60">
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- <div class="item checkout">
+                asdasdasdasdasdasdasdasdasdasdasd
+            </div> -->
             <div class="item contact">
+                <div class="container">
+                    <h4>Billing address</h4>
+                    <form id="checkoutForm">
+                        <div class="row">
+                            <div class="col">
+                                <label for="firstName">First name</label>
+                                <input type="text" id="firstName" required>
+                                <span class="invalid-feedback">Valid first name is required.</span>
+                            </div>
 
+                            <div class="col">
+                                <label for="lastName">Last name</label>
+                                <input type="text" id="lastName" required>
+                                <span class="invalid-feedback">Valid last name is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="username">Username</label>
+                                <div class="input-group">
+                                    <span>@</span>
+                                    <input type="text" id="username" required>
+                                </div>
+                                <span class="invalid-feedback">Your username is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="email">Email (Optional)</label>
+                                <input type="email" id="email" placeholder="you@example.com">
+                                <span class="invalid-feedback">Please enter a valid email address for shipping
+                                    updates.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" required>
+                                <span class="invalid-feedback">Please enter your shipping address.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="address2">Address 2 (Optional)</label>
+                                <input type="text" id="address2" placeholder="Apartment or suite">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="country">Country</label>
+                                <select id="country" required>
+                                    <option value="">Choose...</option>
+                                    <option>United States</option>
+                                </select>
+                                <span class="invalid-feedback">Please select a valid country.</span>
+                            </div>
+
+                            <div class="col">
+                                <label for="state">State</label>
+                                <select id="state" required>
+                                    <option value="">Choose...</option>
+                                    <option>California</option>
+                                </select>
+                                <span class="invalid-feedback">Please provide a valid state.</span>
+                            </div>
+
+                            <div class="col">
+                                <label for="zip">Zip</label>
+                                <input type="text" id="zip" required>
+                                <span class="invalid-feedback">Zip code required.</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col">
+                                <input type="checkbox" id="same-address">
+                                <label for="same-address">Shipping address is the same as my billing address</label>
+                            </div>
+
+                            <div class="col">
+                                <input type="checkbox" id="save-info">
+                                <label for="save-info">Save this information for next time</label>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h4>Payment</h4>
+
+                        <div class="row">
+                            <div class="col">
+                                <input type="radio" id="credit" name="paymentMethod" checked>
+                                <label for="credit">Credit card</label>
+                            </div>
+
+                            <div class="col">
+                                <input type="radio" id="debit" name="paymentMethod">
+                                <label for="debit">Debit card</label>
+                            </div>
+
+                            <div class="col">
+                                <input type="radio" id="paypal" name="paymentMethod">
+                                <label for="paypal">PayPal</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="cc-name">Name on card</label>
+                                <input type="text" id="cc-name" required>
+                                <span class="text-muted">Full name as displayed on card</span>
+                                <span class="invalid-feedback">Name on card is required.</span>
+                            </div>
+
+                            <div class="col">
+                                <label for="cc-number">Credit card number</label>
+                                <input type="text" id="cc-number" required>
+                                <span class="invalid-feedback">Credit card number is required.</span>
+                            </div>
+
+                            <div class="col">
+                                <label for="cc-expiration">Expiration</label>
+                                <input type="text" id="cc-expiration" required>
+                                <span class="invalid-feedback">Expiration date required.</span>
+                            </div>
+
+                            <div class="col">
+                                <label for="cc-cvv">CVV</label>
+                                <input type="text" id="cc-cvv" required>
+                                <span class="invalid-feedback">Security code required.</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <button type="submit">Continue to checkout</button>
+                    </form>
+                </div>
             </div>
-        </div>
     </main>
 
     <footer>
