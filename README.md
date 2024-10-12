@@ -1,4 +1,4 @@
-# Praktikum Pemrograman Web Kelompok P18 2024
+# Praktikum Pemrograman Web Kelompok P18 Modul 2 2024
 
 | Nama                     | NRP        |
 | ------------------------ | ---------- |
