@@ -239,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
   checkoutButton.addEventListener("click", function () {
     if (cart.length > 0) {
       alert("Silahkan Lakukan Pembayaran :)");
+      window.location.href = "../Checkout/checkout.js";
       // Optionally, clear the cart after checkout
       cart = [];
       displayCart();

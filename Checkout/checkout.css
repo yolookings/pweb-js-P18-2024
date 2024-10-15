@@ -119,7 +119,6 @@ main {
 /* payment method */
 #grid-container {
   margin-top: 10px;
-  /* background-color: aqua; */
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 3rem;
@@ -129,14 +128,11 @@ main {
 
 .item {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 10px;
 }
 
 /* Payment Options */
-.option {
-  background-color: red;
-}
 
 .box {
   background-color: whitesmoke;
@@ -166,7 +162,7 @@ main {
 
 /* Form Section Styling for Billing and Payment */
 form {
-  background-color: #ffffff;
+  background-color: whitesmoke;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -174,9 +170,14 @@ form {
 }
 
 h4 {
+  font-weight: 900;
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #333;
+}
+
+hr {
+  margin: 20px 0;
 }
 
 .form-label {
@@ -211,6 +212,8 @@ button[type="submit"] {
   border: none;
   padding: 1rem;
   border-radius: 5px;
+  font-family: Fraunces;
+  font-weight: 500;
   font-size: 1.2rem;
   width: 100%;
   cursor: pointer;
@@ -218,6 +221,80 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
+  background-color: #287a44;
+}
+
+label {
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Cart Information */
+.cart-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-title h4 {
+  text-align: center;
+}
+
+.cart-info {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.cart-item .cart-img {
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.cart-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-details p {
+  font-style: italic;
+  text-align: center;
+}
+.cart-item-title {
+  font-weight: 700;
+}
+.cart-img {
+  width: 200px;
+  margin: auto;
+}
+
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #339551;
+  border-radius: 10px;
+  margin: 0 50px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-summary p {
+  color: white;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.cart-summary:hover {
   background-color: #287a44;
 }
 
@@ -260,10 +337,6 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 768px) {
-  .contact {
-    padding: 20px;
-  }
-
   #main-nav ul {
     display: none;
   }
@@ -272,30 +345,9 @@ button[type="submit"]:hover {
     display: flex;
   }
 
-  .contact h1 {
-    font-size: 40px;
-  }
-
-  .contact p {
-    text-align: center;
-  }
-
   img {
     width: 100%;
     height: auto;
-  }
-
-  .contact-info {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .contact-form {
-    flex-direction: column;
-    align-items: center;
-    width: auto;
   }
 
   .footer-section {
