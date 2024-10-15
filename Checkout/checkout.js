@@ -36,20 +36,26 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    cartInfoContainer.innerHTML = cart
+    const itemsContainer = document.createElement("div");
+    itemsContainer.className = "cart-items";
+
+    itemsContainer.innerHTML = cart
       .map(
         (item) => `
-          <div class="cart-item">
-              <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
-              <div class="cart-details">
-                <p class="cart-item-title">${item.title}</p>
-                <p>Quantity: ${item.quantity}</p>
-                <p>Price: $${item.price}</p>
-              </div>
-          </div>
+            <div class="cart-item">
+                <img class="cart-img" src="${item.thumbnail}" alt="${item.title}">
+                <div class="cart-details">
+                    <p class="cart-item-title">${item.title}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Price: $${item.price}</p>
+                </div>
+            </div>
         `
       )
       .join("");
+
+    cartInfoContainer.innerHTML = "";
+    cartInfoContainer.appendChild(itemsContainer);
 
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     const totalPrice = cart.reduce(
@@ -58,12 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     const cartSummaryHTML = `
-        <hr>
+    <div class="summary-container">
         <div class="cart-summary">
             <p>Total Items: ${totalItems}</p>
             <p>Total Price: $${totalPrice.toFixed(2)}</p>
         </div>
-      `;
+    </div>
+    `;
     cartInfoContainer.insertAdjacentHTML("beforeend", cartSummaryHTML);
   }
 
