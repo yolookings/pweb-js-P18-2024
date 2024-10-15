@@ -1,5 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
   const cartInfoContainer = document.querySelector(".cart-info");
+  const requiredFields = document.querySelectorAll(
+    "#checkoutForm input[required], #checkoutForm select[required]"
+  );
+
+  requiredFields.forEach((field) => {
+    field.addEventListener("input", () => {
+      if (field.value.trim() !== "") {
+        const feedback = field.nextElementSibling;
+        if (feedback && feedback.classList.contains("invalid-feedback")) {
+          feedback.style.display = "none";
+        }
+      } else {
+        const feedback = field.nextElementSibling;
+        if (feedback && feedback.classList.contains("invalid-feedback")) {
+          feedback.style.display = "block";
+        }
+      }
+    });
+  });
 
   function loadCart() {
     const storedCart = localStorage.getItem("cart");
